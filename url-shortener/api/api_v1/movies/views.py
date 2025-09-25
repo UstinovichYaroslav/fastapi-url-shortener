@@ -1,6 +1,7 @@
+import random
 from typing import Annotated
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, status, Form
 
 from .crud import MOVIES
 from .dependencies import get_movie
@@ -31,3 +32,21 @@ def read_movie_details(
     ],
 ):
     return movie
+
+
+@router.post(
+    "/",
+    response_model=Movie,
+    status_code=status.HTTP_201_CREATED,
+)
+def create_movie(
+    name: Annotated[str, Form()],
+    description: Annotated[str, Form()],
+    rating: Annotated[float, Form()],
+):
+    return Movie(
+        id=random.randint(1, 100),
+        name=name,
+        description=description,
+        rating=rating,
+    )
