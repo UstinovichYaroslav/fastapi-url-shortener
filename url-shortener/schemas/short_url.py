@@ -1,8 +1,9 @@
-from pydantic import BaseModel, HttpUrl
+from pydantic import BaseModel, HttpUrl, AnyHttpUrl
 
 
 class ShortUrlBase(BaseModel):
-    target_url: HttpUrl
+    # target_url: HttpUrl
+    target_url: AnyHttpUrl
     slug: str
 
 
