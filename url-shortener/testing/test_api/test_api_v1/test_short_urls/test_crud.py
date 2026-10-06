@@ -28,14 +28,6 @@ def create_short_url() -> ShortUrl:
     )
     return storage.create(short_url_in)
 
-
-@pytest.fixture()
-def short_url() -> Generator[ShortUrl]:
-    short_url = create_short_url()
-    yield short_url
-    storage.delete(short_url)
-
-
 class ShortUrlsStorageUpdateTestCase(TestCase):
     def setUp(self) -> None:
         self.short_url = create_short_url()
