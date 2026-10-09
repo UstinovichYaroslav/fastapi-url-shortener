@@ -80,6 +80,6 @@ def update_short_url_details_partial(
     status_code=status.HTTP_204_NO_CONTENT,
 )
 def delete_short_url(
-    url: ShortUrlBySlug,
+    short_url: ShortUrlBySlug,
 ) -> None:
-    storage.delete(short_url=url)
+    storage.delete(short_url=short_url)

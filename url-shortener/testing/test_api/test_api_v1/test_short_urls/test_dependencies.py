@@ -2,7 +2,6 @@ from api.api_v1.short_urls.dependencies import UNSAFE_METHODS
 
 
 class TestUnsafeMethods:
-
     def test_doesnt_contain_safe_methods(self) -> None:
         safe_methods = {
             "GET",
