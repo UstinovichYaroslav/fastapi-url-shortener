@@ -10,7 +10,7 @@ class ShortUrlCreateTestCase(TestCase):
         short_url_in = ShortUrlCreate(
             slug="some-slug",
             description="some-description",
-            target_url="https://example.com",
+            target_url="https://example.com/",
         )
 
         short_url = ShortUrl(
@@ -22,7 +22,7 @@ class ShortUrlCreateTestCase(TestCase):
         )
         self.assertEqual(
             short_url_in.target_url,
-            short_url.target_url,
+            str(short_url.target_url),
         )
         self.assertEqual(
             short_url_in.description,
