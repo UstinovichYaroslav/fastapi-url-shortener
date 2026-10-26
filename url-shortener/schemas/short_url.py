@@ -11,7 +11,7 @@ DescriptionString = Annotated[
 
 
 class ShortUrlBase(BaseModel):
-    target_url: AnyHttpUrl
+    target_url: str | AnyHttpUrl
     description: DescriptionString
 
 
