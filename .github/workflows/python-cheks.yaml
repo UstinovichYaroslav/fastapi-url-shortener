@@ -28,7 +28,18 @@ jobs:
           pip install "black==26.10.1"
 
       - name: Black ⬛️
-        run: black ./
+        run: black --check --diff ./
 
       - name: Log
         run: echo "Black is done"
+  list-dependencies:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v5
+      - name: Install the project
+        run: uv sync --locked --all-extras --dev
+      - name: List dependencies
+        run: uv tree
