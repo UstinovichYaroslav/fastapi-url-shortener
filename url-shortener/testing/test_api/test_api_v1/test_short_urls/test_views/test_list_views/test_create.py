@@ -62,7 +62,8 @@ class TestCreateInvalid:
         ],
     )
     def short_url_create_values(
-        self, request: SubRequest,
+        self,
+        request: SubRequest,
     ) -> tuple[dict[str, Any], str]:
         short_url = create_short_url_random_slug()
         data = short_url.model_dump(mode="json")
