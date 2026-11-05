@@ -63,4 +63,5 @@ class TestUpdatePartial:
         )
         assert response.status_code == status.HTTP_200_OK, response.text
         short_url_db = storage.get_by_slug(slug=short_url.slug)
+        assert short_url_db
         assert short_url_db.description == new_description
