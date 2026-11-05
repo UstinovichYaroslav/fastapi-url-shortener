@@ -1,6 +1,5 @@
 import random
 import string
-from collections.abc import Generator
 from typing import ClassVar
 from unittest import TestCase
 

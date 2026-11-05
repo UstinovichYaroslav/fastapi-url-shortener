@@ -15,7 +15,7 @@ from testing.conftest import create_short_url
         "slu_009",
         pytest.param("qwerty-slu", id="max-slug"),
         pytest.param("slu", id="min-slug"),
-    ]
+    ],
 )
 def short_url(request: SubRequest) -> ShortUrl:
     return create_short_url(request.param)

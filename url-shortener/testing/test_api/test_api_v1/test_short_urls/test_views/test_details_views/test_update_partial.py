@@ -7,7 +7,7 @@ from fastapi.testclient import TestClient
 
 from api.api_v1.short_urls.crud import storage
 from main import app
-from schemas.short_url import ShortUrl, MAX_DESCRIPTION_LEN
+from schemas.short_url import MAX_DESCRIPTION_LEN, ShortUrl
 from testing.conftest import create_short_url_random_slug
 
 
