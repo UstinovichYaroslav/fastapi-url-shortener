@@ -32,7 +32,8 @@ jobs:
 
       - name: Log
         run: echo "Black is done"
-  list-dependencies:
+
+  run-mypy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -41,5 +42,5 @@ jobs:
         uses: astral-sh/setup-uv@v5
       - name: Install the project
         run: uv sync --locked --all-extras --dev
-      - name: List dependencies
-        run: uv tree
+      - name: Run mypy
+        run: mypy url-shortener
