@@ -1,3 +1,5 @@
+from collections.abc import Generator
+
 import pytest
 from _pytest.fixtures import SubRequest
 from fastapi import status
@@ -13,7 +15,7 @@ from testing.conftest import create_short_url_random_slug
 @pytest.mark.apitest
 class TestUpdate:
     @pytest.fixture()
-    def short_url(self, request: SubRequest):
+    def short_url(self, request: SubRequest) -> Generator[ShortUrl]:
         url, description = request.param
         short_url = create_short_url_random_slug(url, description)
         yield short_url
@@ -55,6 +57,7 @@ class TestUpdate:
         response = auth_client.put(url, json=update.model_dump(mode="json"))
         assert response.status_code == status.HTTP_200_OK, response.text
         short_url_db = storage.get_by_slug(slug=short_url.slug)
+        assert short_url_db
         new_data = ShortUrlUpdate(
             target_url=short_url_db.target_url,
             description=short_url_db.description,
