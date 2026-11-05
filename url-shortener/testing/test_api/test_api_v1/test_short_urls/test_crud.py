@@ -28,6 +28,7 @@ def create_short_url() -> ShortUrl:
     )
     return storage.create(short_url_in)
 
+
 class ShortUrlsStorageUpdateTestCase(TestCase):
     def setUp(self) -> None:
         self.short_url = create_short_url()
