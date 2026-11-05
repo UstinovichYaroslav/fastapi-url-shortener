@@ -36,7 +36,7 @@ def build_short_url_random_slug(
 ) -> ShortUrlCreate:
     return build_short_url_create(
         slug="".join(
-            random.choices(
+            random.choices(  # noqa: S311
                 string.ascii_letters,
                 k=8,
             ),
