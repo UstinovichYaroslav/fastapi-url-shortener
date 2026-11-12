@@ -176,4 +176,8 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
+# coverage
 short-urls.json
+
+# secrets
+.secrets
