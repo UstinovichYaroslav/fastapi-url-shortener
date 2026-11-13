@@ -65,7 +65,7 @@ jobs:
       - name: Install dependencies
         run: uv sync --locked --all-extras --dev
       - name: Run python test
-        run: uv run pytest --cov-report=xml
+        run: uv run pytest url-shortener --cov=url-shortener --cov-report=xml:coverage.xml
         env:
           TESTING: 1
           REDIS_PORT: 6379
@@ -74,3 +74,5 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           dry_run: ${{ env.ACT }}
+          fail_ci_if_error: true
+          files: coverage.xml
