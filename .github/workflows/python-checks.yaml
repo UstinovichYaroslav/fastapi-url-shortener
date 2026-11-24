@@ -69,7 +69,7 @@ jobs:
         env:
           TESTING: 1
           URL_SHORTENER__REDIS_CONNECTION_HOST: redis
-          URL_SHORTENER__REDIS_CONNECTION_PORT: 6379
+          URL_SHORTENER__REDIS_CONNECTION_PORT: 6378
 
       - name: Prepare coverage percentage
         run: |
