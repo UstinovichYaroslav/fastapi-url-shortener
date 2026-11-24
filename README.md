@@ -9,9 +9,13 @@
 
 [![codecov](https://codecov.io/github/UstinovichYaroslav/fastapi-url-shortener/graph/badge.svg?token=VH7ZDKGPQC)](https://codecov.io/github/UstinovichYaroslav/fastapi-url-shortener)
 
+[![Coverage](https://img.shields.io/endpoint?url=https%3A%2F%2Fgist.githubusercontent.com%2FUstinovichYaroslav%2F72c0b54d51aeb735494d615b63d90ba0%2Fraw%2Fgistfile1.txt)](./.github/workflows/python-checks.yaml)
+
 ## Develop
 
 ### Setup
+
+https://gist.githubusercontent.com/UstinovichYaroslav/72c0b54d51aeb735494d615b63d90ba0/raw/gistfile1.txt
 
 Right click `url-shortener` -> Mark Directory as -> Sources Root
 

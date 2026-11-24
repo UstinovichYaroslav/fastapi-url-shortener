@@ -39,6 +39,8 @@ jobs:
         run: uv run mypy url-shortener
   run-tests:
     runs-on: ubuntu-latest
+    container:
+      node:20-bookworm-slim
     needs:
       - run-checks
     services:
@@ -52,9 +54,7 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-        ports:
-          # Maps port 6379 on service container to the host
-          - 6379:6379
+
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-python@v7
@@ -65,10 +65,57 @@ jobs:
       - name: Install dependencies
         run: uv sync --locked --all-extras --dev
       - name: Run python test
-        run: uv run pytest url-shortener --cov=url-shortener --cov-report=xml:coverage.xml
+        run: uv run pytest url-shortener --cov=url-shortener --cov-report=json:coverage.json --cov-report=xml:coverage.xml
         env:
           TESTING: 1
-          REDIS_PORT: 6379
+          URL_SHORTENER__REDIS_CONNECTION_HOST: redis
+          URL_SHORTENER__REDIS_CONNECTION_PORT: 6379
+
+      - name: Prepare coverage percentage
+        run: |
+          export EXTRACTED_COVERAGE=$(python -c 'import json;print(json.load(open("coverage.json"))["totals"]["percent_covered_display"])')
+          echo "TOTAL_COVERAGE=$EXTRACTED_COVERAGE" >> $GITHUB_ENV
+          echo "### Tests coverage: ${EXTRACTED_COVERAGE}%" >> $GITHUB_STEP_SUMMARY
+      - name: Upload coverage reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-reports
+          path: |
+            coverge.json
+            coverge.xml
+          retention-days: 1
+
+  update-coverage-badge:
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    needs:
+      - run-tests
+    steps:
+      - name: Download coverage reports
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage-reports
+      - name: Update coverage badge
+        uses: schneegans/dynamic-badges-action@v1.7.0
+        with:
+          auth: ${{ secrets.GIST_TOKEN }}
+          gistID: 39e54419feb170851468c4132bbc3d5f
+          filename: coverage.json
+          label: Coverage
+          message: ${{ env.TOTAL_COVERAGE }}%
+          minColorRange: 70
+          maxColorRange: 90
+          valColorRange: ${{ env.TOTAL_COVERAGE }}
+
+  uploud-to-codecov:
+    runs-on: ubuntu-latest
+    needs:
+      - run-tests
+    steps:
+      - name: Download coverage reports
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage-reports
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5
         with:

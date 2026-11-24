@@ -47,7 +47,6 @@ htmlcov/
 .coverage.*
 .cache
 nosetests.xml
-coverage.xml
 *.cover
 *.py,cover
 .hypothesis/
@@ -181,3 +180,7 @@ short-urls.json
 
 # secrets
 .secrets
+
+.coverage*
+coverage.xml
+coverage.json
