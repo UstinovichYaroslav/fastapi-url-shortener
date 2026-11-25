@@ -68,8 +68,8 @@ jobs:
         run: uv run pytest url-shortener --cov=url-shortener --cov-report=json:coverage.json --cov-report=xml:coverage.xml
         env:
           TESTING: 1
-          URL_SHORTENER__REDIS__CONNECTION_HOST: redis
-          URL_SHORTENER__REDIS__CONNECTION_PORT: 6379
+          URL_SHORTENER__REDIS__CONNECTION__HOST: redis
+          URL_SHORTENER__REDIS__CONNECTION__PORT: 6379
 
       - name: Prepare coverage percentage
         run: |
