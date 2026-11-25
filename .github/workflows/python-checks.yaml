@@ -81,12 +81,12 @@ jobs:
         with:
           name: coverage-reports
           path: |
-            coverge.json
-            coverge.xml
+            coverage.json
+            coverage.xml
           retention-days: 1
 
   update-coverage-badge:
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     needs:
       - run-tests
