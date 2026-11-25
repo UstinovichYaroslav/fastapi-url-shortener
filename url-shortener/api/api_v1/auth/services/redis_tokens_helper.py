@@ -46,5 +46,5 @@ redis_tokens = RedisTokensHelper(
     host=settings.redis.connection.host,
     port=settings.redis.connection.port,
     db=settings.redis.db.users,
-    tokens_set_name=settings.redis.collections_names.tokens,
+    tokens_set_name=settings.redis.collections_names.tokens_set,
 )

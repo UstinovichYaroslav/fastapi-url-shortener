@@ -56,7 +56,7 @@ class RedisCollectionsNamesConfig(BaseModel):
 
 class RedisConnectionConfig(BaseModel):
     host: str = "localhost"
-    port: int = 6379
+    port: int = 6380
 
 
 class RedisConfig(BaseModel):
